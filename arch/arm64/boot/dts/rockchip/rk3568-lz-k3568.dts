@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: (GPL-2.0+ OR MIT)
 /*
  * Copyright (c) 2021 Rockchip Electronics Co., Ltd.
- *
  */
 
 /dts-v1/;
@@ -13,7 +12,7 @@
 
 / {
 	model = "LZ-K3568";
-	compatible = "rockchip,rk3568-evb1-v10", "rockchip,rk3568";
+	compatible = "lz,k3568", "rockchip,rk3568";
 
 	aliases {
 		ethernet0 = &gmac0;
@@ -38,7 +37,6 @@
 			pinctrl-0 = <&led_work_en>;
 		};
 	};
-
 
 	gmac0_xpcsclk: xpcs-gmac0-clock {
 		compatible = "fixed-clock";
@@ -206,8 +204,10 @@
 	assigned-clock-rates = <0>, <125000000>;
 
 	clock_in_out = "output";
-	tx_delay = <0x30>;    /* 0x4e */
-	rx_delay = <0x10>;    /* 0x0b */
+
+	//tx_delay = <0>;    /* 0x4e */
+	//rx_delay = <0>;    /* 0x0b */
+	//rockchip,sgmii-rx-clk-invert;
 
 	phy-handle = <&sgmii_phy>;
 	phy-mode = "sgmii";
@@ -229,9 +229,9 @@
 
 /* RGMII (Port 1, eth0) */
 &gmac1 {
-	assigned-clocks = <&cru SCLK_GMAC1>, <&cru SCLK_GMAC1_RX_TX>;
-	assigned-clock-parents = <&cru 391>;
-	assigned-clock-rates = <0>, <125000000>;
+	assigned-clocks = <&cru SCLK_GMAC1_RX_TX>, <&cru SCLK_GMAC1>;
+	assigned-clock-parents = <&cru SCLK_GMAC1_RGMII_SPEED>, <&cru CLK_MAC1_2TOP>;
+	assigned-clock-rates = <125000000>, <0>;
 
 	clock_in_out = "output";
 	phy-handle = <&rgmii_phy>;
@@ -284,17 +284,19 @@
 &i2c0 {
 	status = "okay";
 
-	vdd_cpu: regulator@1c {
-		compatible = "tcs,tcs4525";
-		reg = <0x1c>;
+	vdd_cpu: regulator@41 {
+		compatible = "rockchip,rk860", "silergy,syr827";
+		reg = <0x41>;
 		fcs,suspend-voltage-selector = <1>;
 		regulator-name = "vdd_cpu";
 		regulator-always-on;
 		regulator-boot-on;
-		regulator-min-microvolt = <800000>;
-		regulator-max-microvolt = <1150000>;
+		regulator-min-microvolt = <712500>;
+		regulator-max-microvolt = <1390000>;
+		regulator-init-microvolt = <900000>;
 		regulator-ramp-delay = <2300>;
 		vin-supply = <&vcc5v0_sys>;
+		regulator-compatible = "rk860";
 
 		regulator-state-mem {
 			regulator-off-in-suspend;
@@ -309,7 +311,7 @@
 		assigned-clocks = <&cru I2S1_MCLKOUT_TX>;
 		assigned-clock-parents = <&cru CLK_I2S1_8CH_TX>;
 		#clock-cells = <1>;
-		clock-output-names = "rk808-clkout1", "rk808-clkout2";
+		clock-output-names = "rk809-clkout1", "rk809-clkout2";
 		clocks = <&cru I2S1_MCLKOUT_TX>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pmic_int>, <&i2s1m0_mclk>;
@@ -344,6 +346,7 @@
 			vdd_gpu: DCDC_REG2 {
 				regulator-name = "vdd_gpu";
 				regulator-always-on;
+				regulator-boot-on;
 				regulator-initial-mode = <0x2>;
 				regulator-min-microvolt = <500000>;
 				regulator-max-microvolt = <1350000>;
@@ -427,6 +430,7 @@
 			vccio_acodec: LDO_REG4 {
 				regulator-name = "vccio_acodec";
 				regulator-always-on;
+				regulator-boot-on;
 				regulator-min-microvolt = <3300000>;
 				regulator-max-microvolt = <3300000>;
 
@@ -547,6 +551,7 @@
 		reg = <0x0>;
 		motorcomm,clk-out-frequency-hz = <125000000>;
 		motorcomm,keep-pll-enabled;
+		motorcomm,auto-sleep-disabled;
 
 		eee-broken-1000t;
 		eee-broken-100tx;
