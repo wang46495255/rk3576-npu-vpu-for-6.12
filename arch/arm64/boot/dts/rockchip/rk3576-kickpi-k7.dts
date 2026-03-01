@@ -14,19 +14,14 @@
 #include "rk3576.dtsi"
 
 / {
-	model = "ArmSoM Sige5";
-	compatible = "armsom,sige5", "rockchip,rk3576";
+	model = "KickPi K7";
+	compatible = "KickPi,k7", "rockchip,rk3576";
 
 	aliases {
 		ethernet0 = &gmac0;
 		ethernet1 = &gmac1;
 		mmc0 = &sdhci;
 		mmc1 = &sdmmc;
-
-		led-boot = &red_led;
-		led-failsafe = &red_led;
-		led-running = &green_led;
-		led-upgrade = &green_led;
 	};
 
 	chosen {
@@ -36,14 +31,12 @@
 	leds: leds {
 		compatible = "gpio-leds";
 
-		green_led: green-led {
-			label = "green:heartbeat";
+		work_led: work-led {
 			gpios = <&gpio4 RK_PB2 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "heartbeat";
 		};
 
-		red_led: red-led {
-			label = "red:status";
+		fen_led: fen-led {
 			gpios = <&gpio4 RK_PB1 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "default-on";
 		};
@@ -236,7 +229,7 @@
 };
 
 &gmac0 {
-	phy-mode = "rgmii-id";
+	phy-mode = "rgmii-rxid";
 	clock_in_out = "output";
 	phy-handle = <&rgmii_phy0>;
 	pinctrl-names = "default";
@@ -244,12 +237,14 @@
 		     &eth0m0_tx_bus2
 		     &eth0m0_rx_bus2
 		     &eth0m0_rgmii_clk
-		     &eth0m0_rgmii_bus>;
+		     &eth0m0_rgmii_bus
+		     &ethm0_clk0_25m_out>;
+    rx_delay = <0x21>;
 	status = "okay";
 };
 
 &gmac1 {
-	phy-mode = "rgmii-id";
+	phy-mode = "rgmii-rxid";
 	clock_in_out = "output";
 	phy-handle = <&rgmii_phy1>;
 	pinctrl-names = "default";
@@ -257,7 +252,9 @@
 		     &eth1m0_tx_bus2
 		     &eth1m0_rx_bus2
 		     &eth1m0_rgmii_clk
-		     &eth1m0_rgmii_bus>;
+		     &eth1m0_rgmii_bus
+		     &ethm1_clk1_25m_out>;
+    rx_delay = <0x20>;
 	status = "okay";
 };
 
@@ -657,10 +654,9 @@
 	rgmii_phy0: phy@1 {
 		compatible = "ethernet-phy-ieee802.3-c22";
 		reg = <0x1>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&gmac0_rst>;
-		reset-assert-us = <20000>;
-		reset-deassert-us = <100000>;
+		clocks = <&cru REFCLKO25M_GMAC0_OUT>;
+		reset-delay-us = <20000>;
+		reset-post-delay-us = <100000>;
 		reset-gpios = <&gpio2 RK_PB5 GPIO_ACTIVE_LOW>;
 	};
 };
@@ -669,10 +665,9 @@
 	rgmii_phy1: phy@1 {
 		compatible = "ethernet-phy-ieee802.3-c22";
 		reg = <0x1>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&gmac1_rst>;
-		reset-assert-us = <20000>;
-		reset-deassert-us = <100000>;
+		clocks = <&cru REFCLKO25M_GMAC1_OUT>;
+		reset-delay-us = <20000>;
+		reset-post-delay-us = <100000>;
 		reset-gpios = <&gpio3 RK_PA3 GPIO_ACTIVE_LOW>;
 	};
 };
@@ -686,14 +681,6 @@
 };
 
 &pinctrl {
-	gmac {
-		gmac0_rst: gmac0-rst {
-			rockchip,pins = <2 RK_PB5 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-		gmac1_rst: gmac1-rst {
-			rockchip,pins = <3 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-	};
 
 	headphone {
 		hp_det_l: hp-det-l {
