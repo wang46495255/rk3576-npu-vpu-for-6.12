@@ -38,7 +38,7 @@
 
 		fen_led: fen-led {
 			gpios = <&gpio4 RK_PB1 GPIO_ACTIVE_HIGH>;
-			linux,default-trigger = "default-on";
+			default-state = "on";
 		};
 	};
 
