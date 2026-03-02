@@ -653,7 +653,7 @@
 &mdio0 {
 	rgmii_phy0: phy@1 {
 		compatible = "ethernet-phy-ieee802.3-c22";
-		reg = <0x1>;
+		reg = <0x0>;
 		clocks = <&cru REFCLKO25M_GMAC0_OUT>;
 		reset-delay-us = <20000>;
 		reset-post-delay-us = <100000>;
@@ -664,7 +664,7 @@
 &mdio1 {
 	rgmii_phy1: phy@1 {
 		compatible = "ethernet-phy-ieee802.3-c22";
-		reg = <0x1>;
+		reg = <0x0>;
 		clocks = <&cru REFCLKO25M_GMAC1_OUT>;
 		reset-delay-us = <20000>;
 		reset-post-delay-us = <100000>;
