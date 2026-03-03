@@ -32,12 +32,12 @@
 		compatible = "gpio-leds";
 
 		work_led: work-led {
-			gpios = <&gpio4 RK_PB2 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio0 RK_PB4 GPIO_ACTIVE_HIGH>;
 			linux,default-trigger = "heartbeat";
 		};
 
 		fen_led: fen-led {
-			gpios = <&gpio4 RK_PB1 GPIO_ACTIVE_HIGH>;
+			gpios = <&gpio2 RK_PB3 GPIO_ACTIVE_HIGH>;
 			default-state = "on";
 		};
 	};
