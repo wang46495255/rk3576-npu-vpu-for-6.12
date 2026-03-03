@@ -939,9 +939,9 @@
 	status = "okay";
 };
 
-&spdif_tx3 {
+/* &spdif_tx3 {
 	status = "okay";
-};
+}; */
 
 &ufshc {
 	vcc-supply = <&vcc_ufs_s0>;
