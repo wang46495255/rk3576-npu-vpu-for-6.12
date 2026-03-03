@@ -689,6 +689,24 @@
 };
 
 &pinctrl {
+	
+	gmac {
+		gmac0_int: gmac0-int {
+			rockchip,pins = <0 RK_PC6 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+		
+		gmac0_rst: gmac0-rst {
+			rockchip,pins = <0 RK_PC2 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+		
+		gmac1_int: gmac1-int {
+			rockchip,pins = <0 RK_PC7 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+		
+		gmac1_rst: gmac1-rst {
+			rockchip,pins = <0 RK_PC5 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
 
 	headphone {
 		hp_det_l: hp-det-l {
