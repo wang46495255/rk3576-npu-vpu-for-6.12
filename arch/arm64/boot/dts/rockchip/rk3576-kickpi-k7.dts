@@ -702,15 +702,6 @@
 		};
 	};
 
-	leds {
-		led_rgb_r: led-red-en {
-			rockchip,pins = <4 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-		led_rgb_g: led-green-en {
-			rockchip,pins = <4 RK_PB2 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-	};
-
 	pcie {
 		pcie_pwr_en: pcie-pwr-en {
 			rockchip,pins = <3 RK_PD6 RK_FUNC_GPIO &pcfg_pull_down>;
