@@ -32,7 +32,7 @@
 		stdout-path = "serial0:1500000n8";
 	};
 
-	es8388_sound: es8388-sound {
+	/* es8388_sound: es8388-sound {
 		status = "okay";
 		compatible = "rockchip,multicodecs-card";
 		rockchip,card-name = "rockchip-es8388";
@@ -66,7 +66,7 @@
 			linux,code = <KEY_PLAYPAUSE>;
 			press-threshold-microvolt = <2000>;
 		};
-	};
+	}; */
 
 	leds: leds {
 		compatible = "gpio-leds";
