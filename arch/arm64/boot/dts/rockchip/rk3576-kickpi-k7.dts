@@ -15,8 +15,8 @@
 #include "rk3576.dtsi"
 
 / {
-	model = "ArmSoM Sige5";
-	compatible = "armsom,sige5", "rockchip,rk3576";
+	model = "KICKPI K7";
+	compatible = "kickpi,k7", "rockchip,rk3576";
 
 	aliases {
 		ethernet0 = &gmac0;
