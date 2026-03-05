@@ -673,11 +673,3 @@
 	pinctrl-0 = <&uart0m0_xfer>;
 	status = "okay";
 };
-
-/* Used by Bluetooth modules, enabled in a version specific overlay */
-&uart4 {
-	pinctrl-0 = <&uart4m1_xfer &uart4m1_ctsn &uart4m1_rtsn>;
-	pinctrl-names = "default";
-	uart-has-rtscts;
-};
-
