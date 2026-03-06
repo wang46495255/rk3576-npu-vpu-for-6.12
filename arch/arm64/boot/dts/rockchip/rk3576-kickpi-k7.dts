@@ -100,7 +100,7 @@
 		vin-supply = <&vcc_5v0_sys>;
 	};
 
-	vcc_3v3_pcie: regulator-vcc-3v3-pcie {
+	/* vcc_3v3_pcie: regulator-vcc-3v3-pcie {
 		compatible = "regulator-fixed";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pcie_pwr_en>;
@@ -111,7 +111,7 @@
 		gpio = <&gpio3 RK_PD6 GPIO_ACTIVE_HIGH>;
 		startup-delay-us = <5000>;
 		vin-supply = <&vcc_5v0_sys>;
-	};
+	}; */
 
 	vcc_3v3_rtc_s5: regulator-vcc-3v3-rtc-s5 {
 		compatible = "regulator-fixed";
@@ -153,7 +153,7 @@
 		vin-supply = <&vcc_12v0_dcin>;
 	};
 
-	vcc_5v0_typec0: regulator-vcc-5v0-typec0 {
+	/* vcc_5v0_typec0: regulator-vcc-5v0-typec0 {
 		compatible = "regulator-fixed";
 		enable-active-high;
 		gpios = <&gpio4 RK_PA6 GPIO_ACTIVE_HIGH>;
@@ -163,9 +163,9 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 		vin-supply = <&vcc_5v0_device>;
-	};
+	}; */
 
-	vcc_5v0_usbhost: regulator-vcc-5v0-usbhost {
+	/* vcc_5v0_usbhost: regulator-vcc-5v0-usbhost {
 		compatible = "regulator-fixed";
 		enable-active-high;
 		gpios = <&gpio4 RK_PA4 GPIO_ACTIVE_HIGH>;
@@ -175,7 +175,7 @@
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
 		vin-supply = <&vcc_5v0_device>;
-	};
+	}; */
 
 	vcc_3v3_ufs_s0: regulator-vcc-ufs-s0 {
 		compatible = "regulator-fixed";
