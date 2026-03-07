@@ -99,19 +99,18 @@
 		regulator-max-microvolt = <2000000>;
 		vin-supply = <&vcc_5v0_sys>;
 	};
-
-	/* vcc_3v3_pcie: regulator-vcc-3v3-pcie {
+	
+	vcc_3v3_pcie: regulator-vcc-3v3-pcie {
 		compatible = "regulator-fixed";
 		pinctrl-names = "default";
 		pinctrl-0 = <&pcie_pwr_en>;
 		regulator-name = "vcc_3v3_pcie";
+		regulator-always-on;
+		regulator-boot-on
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-		enable-active-high;
-		gpio = <&gpio3 RK_PD6 GPIO_ACTIVE_HIGH>;
-		startup-delay-us = <5000>;
 		vin-supply = <&vcc_5v0_sys>;
-	}; */
+	};
 
 	vcc_3v3_rtc_s5: regulator-vcc-3v3-rtc-s5 {
 		compatible = "regulator-fixed";
@@ -186,6 +185,10 @@
 		regulator-max-microvolt = <3300000>;
 		vin-supply = <&vcc_5v0_sys>;
 	};
+};
+
+&combphy0_ps {
+	status = "okay";
 };
 
 &cpu_b0 {
@@ -641,6 +644,12 @@
 			rockchip,pins = <3 RK_PA3 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
+	
+	pcie {
+		pcie_reset: pcie-reset {
+			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
+	};
 };
 
 &sdhci {
@@ -666,6 +675,13 @@
 	sd-uhs-sdr104;
 	vmmc-supply = <&vcc_3v3_s3>;
 	vqmmc-supply = <&vccio_sd_s0>;
+	status = "okay";
+};
+
+&pcie {
+	pinctrl-names = "default";
+	pinctrl-0 = <&gpio0 RK_PB0 GPIO_ACTIVE_HIGH>;
+	vpcie3v3-supply = <&vcc_3v3_pcie>;
 	status = "okay";
 };
 
