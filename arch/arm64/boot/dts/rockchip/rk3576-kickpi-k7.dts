@@ -106,7 +106,7 @@
 		pinctrl-0 = <&pcie_pwr_en>;
 		regulator-name = "vcc_3v3_pcie";
 		regulator-always-on;
-		regulator-boot-on
+		regulator-boot-on;
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
 		vin-supply = <&vcc_5v0_sys>;
