@@ -754,7 +754,7 @@
 };
 
 &u2phy0_ogt {
-	rockchip,type-vbus-de;
+	// rockchip,type-vbus-de;
 	status = "okay";
 };
 
