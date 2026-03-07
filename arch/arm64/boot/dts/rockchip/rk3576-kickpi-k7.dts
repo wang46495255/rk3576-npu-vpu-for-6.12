@@ -785,7 +785,7 @@
 	dr_mode = "otg";
 	maximum-speed = "super-speed";
 	usb-role-switch;
-	extcon = <&usb0>;
+	extcon = <&usbc0>;
 	snps,dis_u2_susphy_quirk;
 	snps,dis_enblslpm_quirk;
 	status = "okay";
