@@ -102,8 +102,6 @@
 	
 	vcc_3v3_pcie: regulator-vcc-3v3-pcie {
 		compatible = "regulator-fixed";
-		pinctrl-names = "default";
-		pinctrl-0 = <&pcie_pwr_en>;
 		regulator-name = "vcc_3v3_pcie";
 		regulator-always-on;
 		regulator-boot-on;
