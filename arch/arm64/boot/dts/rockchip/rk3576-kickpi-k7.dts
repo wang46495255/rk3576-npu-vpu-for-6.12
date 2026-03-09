@@ -808,3 +808,34 @@
 	status = "okay";
 };
 
+&rkvdec {
+	status = "okay";
+};
+
+&vdpu383 {
+	status = "okay";
+};
+
+&vepu0 {
+	status = "okay";
+};
+
+&vepu1 {
+	status = "okay";
+};
+
+&iommu_rkvdec {
+	status = "okay";
+};
+
+&iommu_vdpu {
+	status = "okay";
+};
+
+&iommu_vdpu0 {
+	status = "okay";
+};
+
+&iommu_vdpu1 {
+	status = "okay";
+};
