@@ -1,0 +1,137 @@
+// SPDX-License-Identifier: (GPL-2.0+ OR MIT)
+/*
+ * Copyright (c) 2024 Rockchip Electronics Co., Ltd.
+ * RK3576 Video Codec Device Tree for Linux Mainline
+ */
+
+// 追加根节点内的MPP服务节点（编解码驱动依赖）
+&{/} {
+	mpp_srv: mpp-srv {
+		compatible = "rockchip,mpp-srv";
+	};
+};
+
+// 所有外设节点必须追加到SOC总线节点内，继承地址空间配置
+&soc {
+	/* 视频编码核心0 (对应原vepu0) */
+	rkvenc0: rkvenc-core@27a00000 {
+		compatible = "rockchip,rkv-encoder-rk3576-core", "rockchip,rkv-encoder-v2-ccu";
+		reg = <0x0 0x27a00000 0x0 0x6000>;
+		interrupts = <GIC_SPI 386 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "irq_vepu0";
+		clocks = <&cru ACLK_VEPU0>, <&cru HCLK_VEPU0>, <&cru CLK_VEPU0_CORE>;
+		clock-names = "aclk_vcodec", "hclk_vcodec", "clk_core";
+		rockchip,normal-rates = <400000000>, <0>, <702000000>;
+		resets = <&cru SRST_A_VEPU0>, <&cru SRST_H_VEPU0>, <&cru SRST_VEPU0_CORE>;
+		reset-names = "video_a", "video_h", "video_core";
+		assigned-clocks = <&cru ACLK_VEPU0>, <&cru CLK_VEPU0_CORE>;
+		assigned-clock-rates = <400000000>, <702000000>;
+		iommus = <&rkvenc0_mmu>;
+		rockchip,srv = <&mpp_srv>;
+		rockchip,taskqueue-node = <3>;
+		rockchip,task-capacity = <8>;
+		power-domains = <&power RK3576_PD_VEPU0>;
+		status = "disabled";
+	};
+
+	/* 视频编码核心1 (对应原vepu1) */
+	rkvenc1: rkvenc-core@27a10000 {
+		compatible = "rockchip,rkv-encoder-rk3576-core", "rockchip,rkv-encoder-v2-ccu";
+		reg = <0x0 0x27a10000 0x0 0x6000>;
+		interrupts = <GIC_SPI 387 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "irq_vepu1";
+		clocks = <&cru ACLK_VEPU1>, <&cru HCLK_VEPU1>, <&cru CLK_VEPU1_CORE>;
+		clock-names = "aclk_vcodec", "hclk_vcodec", "clk_core";
+		rockchip,normal-rates = <400000000>, <0>, <702000000>;
+		resets = <&cru SRST_A_VEPU1>, <&cru SRST_H_VEPU1>, <&cru SRST_VEPU1_CORE>;
+		reset-names = "video_a", "video_h", "video_core";
+		assigned-clocks = <&cru ACLK_VEPU1>, <&cru CLK_VEPU1_CORE>;
+		assigned-clock-rates = <400000000>, <702000000>;
+		iommus = <&rkvenc1_mmu>;
+		rockchip,srv = <&mpp_srv>;
+		rockchip,taskqueue-node = <3>;
+		rockchip,task-capacity = <8>;
+		power-domains = <&power RK3576_PD_VEPU1>;
+		status = "disabled";
+	};
+
+	/* 编码核心0 IOMMU */
+	rkvenc0_mmu: iommu@27a00800 {
+		compatible = "rockchip,iommu-v2";
+		reg = <0x0 0x27a00800 0x0 0x40>, <0x0 0x27a00900 0x0 0x40>;
+		interrupts = <GIC_SPI 388 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "irq_rkvenc0_mmu";
+		clocks = <&cru ACLK_VEPU0>, <&cru HCLK_VEPU0>, <&cru CLK_VEPU0_CORE>;
+		clock-names = "aclk", "iface", "iface_c";
+		rockchip,disable-mmu-reset;
+		rockchip,enable-cmd-retry;
+		rockchip,shootdown-entire;
+		#iommu-cells = <0>;
+		power-domains = <&power RK3576_PD_VEPU0>;
+		status = "disabled";
+	};
+
+	/* 编码核心1 IOMMU */
+	rkvenc1_mmu: iommu@27a10800 {
+		compatible = "rockchip,iommu-v2";
+		reg = <0x0 0x27a10800 0x0 0x40>, <0x0 0x27a10900 0x0 0x40>;
+		interrupts = <GIC_SPI 389 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "irq_rkvenc1_mmu";
+		clocks = <&cru ACLK_VEPU1>, <&cru HCLK_VEPU1>, <&cru CLK_VEPU1_CORE>;
+		clock-names = "aclk", "iface", "iface_c";
+		rockchip,disable-mmu-reset;
+		rockchip,enable-cmd-retry;
+		rockchip,shootdown-entire;
+		#iommu-cells = <0>;
+		power-domains = <&power RK3576_PD_VEPU1>;
+		status = "disabled";
+	};
+
+	/* 视频解码核心 (对应原rkvdec/vdpu383) */
+	rkvdec: rkvdec@27b00000 {
+		compatible = "rockchip,rkv-decoder-rk3576", "rockchip,rkv-decoder-v383";
+		reg = <0x0 0x27b00100 0x0 0x600>, <0x0 0x27b00000 0x0 0x100>;
+		reg-names = "regs", "link";
+		interrupts = <GIC_SPI 308 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "irq_rkvdec";
+		clocks = <&cru ACLK_RKVDEC_ROOT>, <&cru HCLK_RKVDEC>,
+			 <&cru CLK_RKVDEC_CORE>, <&cru ACLK_RKVDEC_ROOT_BAK>,
+			 <&cru CLK_RKVDEC_HEVC_CA>;
+		clock-names = "aclk_vcodec", "hclk_vcodec",
+			      "clk_core", "clk_cabac",
+			      "clk_hevc_cabac";
+		resets = <&cru SRST_A_RKVDEC_BIU >, <&cru SRST_H_RKVDEC_BIU>,
+			 <&cru SRST_RKVDEC_CORE>, <&cru SRST_RKVDEC_HEVC_CA>;
+		reset-names = "video_a","video_h", "video_core", "video_hevc_cabac";
+		rockchip,normal-rates = <600000000>, <0>, <600000000>, <500000000>, <1000000000>;
+		assigned-clocks = <&cru ACLK_RKVDEC_ROOT>, <&cru CLK_RKVDEC_CORE>,
+				  <&cru ACLK_RKVDEC_ROOT_BAK>, <&cru CLK_RKVDEC_HEVC_CA>;
+		assigned-clock-rates = <600000000>,<600000000>, <500000000>, <1000000000>;
+		iommus = <&rkvdec_mmu>;
+		rockchip,srv = <&mpp_srv>;
+		rockchip,task-capacity = <8>;
+		rockchip,taskqueue-node = <5>;
+		rockchip,sram = <&rkvdec_sram>;
+		rockchip,rcb-iova = <0x10000000 0x78000>;
+		rockchip,rcb-min-width = <512>;
+		power-domains = <&power RK3576_PD_VDEC>;
+		status = "disabled";
+	};
+
+	/* 解码核心IOMMU */
+	rkvdec_mmu: iommu@27b00800 {
+		compatible = "rockchip,iommu-v2";
+		reg = <0x0 0x27b00800 0x0 0x40>, <0x0 0x27b00900 0x0 0x40>;
+		interrupts = <GIC_SPI 309 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "irq_rkvdec_mmu";
+		clocks = <&cru ACLK_RKVDEC_ROOT>, <&cru HCLK_RKVDEC>,
+			 <&cru CLK_RKVDEC_CORE>, <&cru ACLK_RKVDEC_ROOT_BAK>;
+		clock-names = "aclk", "iface", "iface_c", "iface_b";
+		rockchip,disable-mmu-reset;
+		rockchip,enable-cmd-retry;
+		rockchip,shootdown-entire;
+		#iommu-cells = <0>;
+		power-domains = <&power RK3576_PD_VDEC>;
+		status = "disabled";
+	};
+};
