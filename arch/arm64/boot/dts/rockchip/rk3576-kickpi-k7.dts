@@ -693,7 +693,7 @@
 	
 	pcie {
 		pcie_reset: pcie-reset {
-			rockchip,pins = <0 RK_PB0 RK_FUNC_GPIO &pcfg_pull_none>;
+			rockchip,pins = <0 RK_PD1 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 	};
 	
@@ -740,7 +740,8 @@
 
 &pcie0 {
 	pinctrl-names = "default";
-	pinctrl-0 = <&gpio0 RK_PB0 GPIO_ACTIVE_HIGH>;
+	pinctrl-0 = <&pcie_reset>;
+	reset-gpios = <&gpio0 RK_PD1 GPIO_ACTIVE_HIGH>;
 	vpcie3v3-supply = <&vcc_3v3_pcie>;
 	status = "okay";
 };
@@ -806,37 +807,5 @@
 	maximum-speed = "super-speed";
 	snps,dis_u2_susphy_quirk;
 	snps,dis_enblslpm_quirk;
-	status = "okay";
-};
-
-&rkvdec {
-	status = "okay";
-};
-
-&vdpu383 {
-	status = "okay";
-};
-
-&vepu0 {
-	status = "okay";
-};
-
-&vepu1 {
-	status = "okay";
-};
-
-&iommu_rkvdec {
-	status = "okay";
-};
-
-&iommu_vdpu {
-	status = "okay";
-};
-
-&iommu_vdpu0 {
-	status = "okay";
-};
-
-&iommu_vdpu1 {
 	status = "okay";
 };
