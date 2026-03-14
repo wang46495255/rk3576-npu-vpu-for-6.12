@@ -107,7 +107,8 @@
 		regulator-boot-on;
 		regulator-min-microvolt = <3300000>;
 		regulator-max-microvolt = <3300000>;
-		vin-supply = <&vcc_5v0_sys>;
+		startup-delay-us = <10000>;
+		vin-supply = <&shared_pwr_en>;
 	};
 
 	vcc_3v3_rtc_s5: regulator-vcc-3v3-rtc-s5 {
@@ -150,6 +151,17 @@
 		vin-supply = <&vcc_12v0_dcin>;
 	};
 
+    shared_pwr_en: regulator-shared-pwr-en {
+	    compatible = "regulator-fixed";
+	    regulator-name = "shared_pwr_en";
+	    pinctrl-names = "default";
+	    pinctrl-0 = <&usb_host_pwren>;
+	    enable-active-high;
+	    gpios = <&gpio3 RK_PD6 GPIO_ACTIVE_HIGH>;
+	    regulator-always-on;
+	    regulator-boot-on;
+    };
+
 	vcc_5v0_typec0: regulator-vcc-5v0-typec0 {
 		compatible = "regulator-fixed";
 		enable-active-high;
@@ -164,14 +176,12 @@
 
 	vcc_5v0_host: regulator-vcc-5v0-host {
 		compatible = "regulator-fixed";
-		enable-active-high;
-		gpios = <&gpio3 RK_PD6 GPIO_ACTIVE_HIGH>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&usb_host_pwren>;
-		regulator-name = "vcc_5v0_usbhost";
+		regulator-name = "vcc_5v0_host";
 		regulator-min-microvolt = <5000000>;
 		regulator-max-microvolt = <5000000>;
-		vin-supply = <&vcc_5v0_device>;
+		regulator-always-on;
+		regulator-boot-on;
+		vin-supply = <&shared_pwr_en>;
 	};
 
 	vcc_3v3_ufs_s0: regulator-vcc-ufs-s0 {
