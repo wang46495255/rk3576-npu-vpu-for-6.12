@@ -13,6 +13,7 @@
 #include <dt-bindings/soc/rockchip,vop2.h>
 #include <dt-bindings/usb/pd.h>
 #include "rk3576.dtsi"
+#include "rk3576-npu.dtsi"
 
 / {
 	model = "KICKPI K7";
@@ -816,5 +817,13 @@
 	maximum-speed = "super-speed";
 	snps,dis_u2_susphy_quirk;
 	snps,dis_enblslpm_quirk;
+	status = "okay";
+};
+
+&rknpu {
+	status = "okay";
+};
+
+&rknpu_mmu {
 	status = "okay";
 };
