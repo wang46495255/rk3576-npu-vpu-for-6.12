@@ -274,9 +274,9 @@
 		reg = <0x54 0x2>;
 	};
 	
-	npu_leakage: npu-leakage@3e {
+	/* npu_leakage: npu-leakage@3e {
 		reg = <0x3e 0x4>;
-	};
+	}; */
 };
 
 &power {
