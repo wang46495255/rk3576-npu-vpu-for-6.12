@@ -13,7 +13,7 @@
 #include <dt-bindings/soc/rockchip,vop2.h>
 #include <dt-bindings/usb/pd.h>
 #include "rk3576.dtsi"
-#include "rk3576-npu.dtsi"
+#include "rk3576-ip.dtsi"
 
 / {
 	model = "KICKPI K7";
@@ -820,6 +820,8 @@
 	status = "okay";
 };
 
+/*
+
 &rknpu {
 	status = "okay";
 };
@@ -827,3 +829,5 @@
 &rknpu_mmu {
 	status = "okay";
 };
+*/
+
