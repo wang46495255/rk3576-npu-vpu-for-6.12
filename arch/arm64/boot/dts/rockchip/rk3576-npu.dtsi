@@ -265,6 +265,18 @@
 	npu_opp_info: npu-opp-info@42 {
 		reg = <0x42 0x6>;
 	};
+	
+	specification_serial_number: spec-sn@xx {
+		reg = <0x50 0x4>;
+	};
+	
+	test_version: test-ver@xx {
+		reg = <0x54 0x2>;
+	};
+	
+	npu_leakage: npu-leakage@3e {
+		reg = <0x3e 0x4>;
+	};
 };
 
 &power {
