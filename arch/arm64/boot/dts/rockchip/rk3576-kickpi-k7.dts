@@ -852,15 +852,6 @@
 		};
 	};
 
-	leds {
-		led_rgb_r: led-red-en {
-			rockchip,pins = <4 RK_PB1 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-		led_rgb_g: led-green-en {
-			rockchip,pins = <4 RK_PB2 RK_FUNC_GPIO &pcfg_pull_none>;
-		};
-	};
-
 	pcie {
 		pcie_reset: pcie-reset {
 			rockchip,pins = <0 RK_PD1 RK_FUNC_GPIO &pcfg_pull_up>;
@@ -868,7 +859,7 @@
 	};
 
 	usb {
-		usb_host_pwren {
+		usb_host_pwren: usb-host-pwren {
 			rockchip,pins = <3 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 
