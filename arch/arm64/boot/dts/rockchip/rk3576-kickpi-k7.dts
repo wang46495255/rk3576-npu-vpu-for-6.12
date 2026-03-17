@@ -215,7 +215,7 @@
 		comaptible = "regulator-fixed";
 		regulator-name = "shared_pwr_en";
 		pinctrl-names = "default";
-		pinctrl-0 = <usb-host-pwren>;
+		pinctrl-0 = <usb_host_pwren>;
 		enable-active-high;
 		gpios = <&gpio3 RK_PD6 GPIO_ACTIVE_HIGH>;
 		regulator-always-on;
@@ -868,7 +868,7 @@
 	};
 
 	usb {
-		usb-host-pwren {
+		usb_host_pwren {
 			rockchip,pins = <3 RK_PD6 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 
