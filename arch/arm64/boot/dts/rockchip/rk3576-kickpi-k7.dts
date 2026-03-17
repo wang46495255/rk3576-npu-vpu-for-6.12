@@ -237,7 +237,7 @@
 		clocks = <&hym8563>;
 		clock-names = "ext_clock";
 		pinctrl-names = "default";
-		pinctrl-0 = <&wifi_reg_on>;
+		pinctrl-0 = <&wifi_poweren_gpio>;
 		reset-gpios = <&gpio1 RK_PC6 GPIO_ACTIVE_LOW>;
 	};
 
