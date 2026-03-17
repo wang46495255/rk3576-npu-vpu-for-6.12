@@ -146,7 +146,7 @@
 		regulator-always-on;
 		regulator-boot-on;
 		startup-delay-us = <10000>;
-		vin-supply = <&shared-pwr_en>;
+		vin-supply = <&shared_pwr_en>;
 	};
 
 	vcc_3v3_rtc_s5: regulator-vcc-3v3-rtc-s5 {
