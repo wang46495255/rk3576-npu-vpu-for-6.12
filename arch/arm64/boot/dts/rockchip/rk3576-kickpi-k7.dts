@@ -742,7 +742,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&usbc0_int>;
 		vbus-supply = <&vcc_5v0_typec0>;
-		disable-dp-alt-mode
+		disable-dp-alt-mode;
 		status = "okay";
 
 		port {
