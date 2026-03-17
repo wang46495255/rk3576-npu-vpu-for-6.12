@@ -215,7 +215,7 @@
 		comaptible = "regulator-fixed";
 		regulator-name = "shared_pwr_en";
 		pinctrl-names = "default";
-		pinctrl-0 = <usb_host_pwren>;
+		pinctrl-0 = <usb-host-pwren>;
 		enable-active-high;
 		gpios = <&gpio3 RK_PD6 GPIO_ACTIVE_HIGH>;
 		regulator-always-on;
