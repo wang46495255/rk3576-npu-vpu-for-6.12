@@ -243,7 +243,7 @@
 
 	wireless_wlan: wireless-wlan {
 		compatible = "wlan-platdata";
-		wifi_chip_type = "rtl8822cs";
+		wifi_chip_type = "swt6621";
         clocks = <&hym8563>;
 		clock-names = "ext_clock";
 		pinctrl-names = "default";
