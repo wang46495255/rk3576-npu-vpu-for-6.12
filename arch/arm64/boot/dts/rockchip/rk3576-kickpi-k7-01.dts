@@ -18,8 +18,8 @@
 #include "rk3576-ip.dtsi"
 #include "rk3576-patch.dtsi"
 #include "rk3576-ip-rk806.dtsi"
-#include "rk3576-ramoops.dtsi"
  */
+#include "rk3576-npu-reference.dtsi"
 
 / {
 	model = "KICKPI K7";
