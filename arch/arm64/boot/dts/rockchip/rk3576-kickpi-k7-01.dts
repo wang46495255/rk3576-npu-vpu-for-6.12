@@ -13,11 +13,13 @@
 #include <dt-bindings/soc/rockchip,vop2.h>
 #include <dt-bindings/usb/pd.h>
 #include "rk3576.dtsi"
+/*
 #include "rk3576-rk806.dtsi"
 #include "rk3576-ip.dtsi"
 #include "rk3576-patch.dtsi"
 #include "rk3576-ip-rk806.dtsi"
 #include "rk3576-ramoops.dtsi"
+ */
 
 / {
 	model = "KICKPI K7";
