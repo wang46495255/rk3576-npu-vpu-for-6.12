@@ -840,8 +840,6 @@
 	status = "okay";
 };
 
-/*
-
 &rknpu {
 	status = "okay";
 };
@@ -849,5 +847,5 @@
 &rknpu_mmu {
 	status = "okay";
 };
-*/
+
 
