@@ -208,15 +208,6 @@
 		regulator-max-microvolt = <3300000>;
 		vin-supply = <&vcc_5v0_sys>;
 	};
-	
-	vcc_npu_power: regulator-vcc-npu-power {
-		compatible = "regulator-fixed";
-		regulator-name = "vcc_npu_power";
-		regulator-boot-on;
-		regulator-always-on;
-		regulator-fixed-microvolt = <950000>;
-		vin-supply = <&vdd_npu_s0>;
-	};
 };
 
 &combphy0_ps {
@@ -849,7 +840,7 @@
 };
 
 &rknpu {
-	rknpu-supply = <&vcc_npu_power>;
+	rknpu-supply = <&vdd_npu_s0>;
 	status = "okay";
 };
 
