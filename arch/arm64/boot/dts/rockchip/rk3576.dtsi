@@ -1054,7 +1054,9 @@
 							 <&cru ACLK_RKNN1>,
 							 <&cru ACLK_RKNN_CBUF>,
 							 <&cru CLK_RKNN_DSU0>,
+							 /*
 							 <&scmi_clk SCMI_CLK_NPU>,
+							 */
 							 <&cru HCLK_RKNN_CBUF>,
 							 <&cru HCLK_RKNN_ROOT>,
 							 <&cru HCLK_NPU_CM0_ROOT>,
