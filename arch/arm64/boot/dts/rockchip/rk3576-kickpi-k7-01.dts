@@ -833,16 +833,16 @@
 	snps,dis_enblslpm_quirk;
 	status = "okay";
 };
-/*
+
 &rknpu {
-	rknpu-supply = <&vdd_npu_s0>;
+	// rknpu-supply = <&vdd_npu_s0>;
 	status = "okay";
 };
 
 &rknpu_mmu {
 	status = "okay";
 };
-*/
+
 &mpp_srv {
 	status = "okay";
 };
