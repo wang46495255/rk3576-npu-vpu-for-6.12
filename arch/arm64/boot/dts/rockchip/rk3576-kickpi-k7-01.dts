@@ -166,8 +166,8 @@
 		vin-supply = <&vcc_12v0_dcin>;
 	};
 
-    shared_pwr_en: regulator-shared-pwr-en {
-	    compatible = "regulator-fixed";
+	shared_pwr_en: regulator-shared-pwr-en {
+		compatible = "regulator-fixed";
 	    regulator-name = "shared_pwr_en";
 	    pinctrl-names = "default";
 	    pinctrl-0 = <&usb_host_pwren>;
@@ -745,6 +745,11 @@
 	};
 };
 
+&saradc {
+	vref-supply = <&vcca_1v8_s0>;
+	status = "okay";
+};
+
 &sdhci {
 	bus-width = <8>;
 	full-pwr-cycle-in-suspend;
@@ -908,3 +913,6 @@
 	status = "okay";
 };
 
+&wdt {
+	status = "okay";
+};
