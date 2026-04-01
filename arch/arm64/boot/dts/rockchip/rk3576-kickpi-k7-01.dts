@@ -42,7 +42,7 @@
 		};
 	};
 	
-	/* reserved-memory {
+	reserved-memory {
 		#address-cells = <2>;
 		#size-cells = <2>;
 		ranges;
@@ -54,7 +54,7 @@
 		    pmsg-size = <0x30000>;
             record-size = <0x14000>;
 		};
-	}; */
+	};
 
 	vcc_12v0_dcin: regulator-vcc-12v0-dcin {
 		compatible = "regulator-fixed";
