@@ -214,8 +214,7 @@
 		regulator-name = "vcc_npu_power";
 		regulator-boot-on;
 		regulator-always-on;
-		regulator-min-microvolt = <550000>;
-		regulator-max-microvolt = <950000>;
+		regulator-fixed-microvolt = <950000>;
 		vin-supply = <&vdd_npu_s0>;
 	};
 };
