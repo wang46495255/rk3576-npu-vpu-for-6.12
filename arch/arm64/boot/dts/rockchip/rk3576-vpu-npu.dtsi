@@ -527,26 +527,25 @@
 				opp-microvolt-L9 = <750000 750000 875000>;
 			};
 
-		};
-
-		rknpu_mmu: iommu@27702000 {
-			compatible = "rockchip,rk3576-iommu", "rockchip,rk3568-iommu", "rockchip,iommu-v2";
-			reg = <0x0 0x27702000 0x0 0x100>,
-				<0x0 0x27702100 0x0 0x100>,
-				<0x0 0x2770a000 0x0 0x100>,
-				<0x0 0x2770a100 0x0 0x100>;
-			interrupts = <GIC_SPI 247 IRQ_TYPE_LEVEL_HIGH>,
+			rknpu_mmu: iommu@27702000 {
+				compatible = "rockchip,rk3576-iommu", "rockchip,rk3568-iommu", "rockchip,iommu-v2";
+				reg = <0x0 0x27702000 0x0 0x100>,
+					<0x0 0x27702100 0x0 0x100>,
+					<0x0 0x2770a000 0x0 0x100>,
+					<0x0 0x2770a100 0x0 0x100>;
+				interrupts = <GIC_SPI 247 IRQ_TYPE_LEVEL_HIGH>,
 					<GIC_SPI 248 IRQ_TYPE_LEVEL_HIGH>;
-			interrupt-names = "npu0_mmu", "npu1_mmu";
-			clocks = <&cru ACLK_RKNN0>, <&cru ACLK_RKNN1>, <&cru ACLK_RKNN_CBUF>, <&cru HCLK_RKNN_CBUF>;
-			clock-names = "aclk0", "aclk1", "a_iface", "h_iface";
-			#iommu-cells = <0>;
-			status = "disabled";
-		};
+				interrupt-names = "npu0_mmu", "npu1_mmu";
+				clocks = <&cru ACLK_RKNN0>, <&cru ACLK_RKNN1>, <&cru ACLK_RKNN_CBUF>, <&cru HCLK_RKNN_CBUF>;
+				clock-names = "aclk0", "aclk1", "a_iface", "h_iface";
+				#iommu-cells = <0>;
+				status = "disabled";
+			};
 
-		npu_pvtpll: syscon@27270000 {
-			compatible = "rockchip,rk3576-npu-pvtpll", "syscon";
-			reg = <0x0 0x27270000 0x0 0x1000>;
+			npu_pvtpll: syscon@27270000 {
+				compatible = "rockchip,rk3576-npu-pvtpll", "syscon";
+				reg = <0x0 0x27270000 0x0 0x1000>;
+			};
 		};
 	};
 };
