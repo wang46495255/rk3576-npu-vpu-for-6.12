@@ -412,13 +412,14 @@
 
 			vdd_npu_s0: dcdc-reg2 {
 				regulator-boot-on;
+				regulator-always-on;
 				regulator-min-microvolt = <550000>;
 				regulator-max-microvolt = <950000>;
 				regulator-ramp-delay = <12500>;
 				regulator-name = "vdd_npu_s0";
 				regulator-enable-ramp-delay = <400>;
 				regulator-state-mem {
-					regulator-off-in-suspend;
+					regulator-on-in-suspend;
 				};
 			};
 
@@ -839,10 +840,16 @@
 	status = "okay";
 };
 
+&power {
+	/delete-node/ power-domain@RK3576_PD_NPU;
+};
+
 &rknpu {
+	/delete-property/ power-domains;
+	/delete-property/ power-domain-names;
 	rknpu-supply = <&vdd_npu_s0>;
-	mem-supply = <&vdd_npu_s0>;
 	status = "okay";
+	/delete-property/ iommus;
 };
 
 &rknpu_mmu {
