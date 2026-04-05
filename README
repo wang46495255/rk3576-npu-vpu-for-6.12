@@ -1,18 +1,96 @@
-Linux kernel
-============
+此项目用与生成rk3576的开发板生成FNOS（6.12内核）的DTB文件，
+有一定的风险不开机，需要自行处理，
+仅在KICKPI-K7开发板上验证。
 
-There are several guides for kernel developers and users. These guides can
-be rendered in a number of formats, like HTML and PDF. Please read
-Documentation/admin-guide/README.rst first.
+自己的设备树改动部分：
+1.引用部分
+#include "rk3576-vpu-npu.dtsi"
 
-In order to build the documentation, use ``make htmldocs`` or
-``make pdfdocs``.  The formatted documentation can also be read online at:
+2.NPU部分使用RK806本身电源，
+			vdd_npu_s0: dcdc-reg2 {
+				regulator-boot-on;
+				regulator-always-on;
+				regulator-min-microvolt = <550000>;
+				regulator-max-microvolt = <950000>;
+				regulator-ramp-delay = <12500>;
+				regulator-name = "vdd_npu_s0";
+				regulator-enable-ramp-delay = <400>;
+				regulator-state-mem {
+                    //regulator-off-in-suspend;这里改动，避免休眠。
+					regulator-on-in-suspend;
+				};
+			};
 
-    https://www.kernel.org/doc/html/latest/
+3.设备树最后加入这些节点启用，不然启动时死机
+// 删除NPU电源配置
+&power {
+	/delete-node/ power-domain@RK3576_PD_NPU;
+};
+//启用NPU，删除电源引用和IOMMUS，iommus自己可以尝试是否有必要删除。
+&rknpu {
+	/delete-property/ power-domains;
+	/delete-property/ power-domain-names;
+	rknpu-supply = <&vdd_npu_s0>;
+	status = "okay";
+	/delete-property/ iommus;
+};
 
-There are various text files in the Documentation/ subdirectory,
-several of them using the reStructuredText markup notation.
+&rknpu_mmu {
+	status = "okay";
+};
 
-Please read the Documentation/process/changes.rst file, as it contains the
-requirements for building and running the kernel, and information about
-the problems which may result by upgrading your kernel.
+&mpp_srv {
+	status = "okay";
+};
+
+&jpegd {
+	status = "okay";
+};
+&jpege {
+	status = "okay";
+};
+&jpeg_mmu {
+	status = "okay";
+};
+&rga2_core0 {
+	status = "okay";
+};
+&rga2_core0_mmu {
+	status = "okay";
+};
+&rga2_core1 {
+	status = "okay";
+};
+&rga2_core1_mmu {
+	status = "okay";
+};
+&iep {
+	status = "okay";
+};
+&iep_mmu {
+	status = "okay";
+};
+&vdpp {
+	status = "okay";
+};
+&rkvenc0 {
+	status = "okay";
+};
+&rkvenc0_mmu {
+	status = "okay";
+};
+&rkvenc1 {
+	status = "okay";
+};
+&rkvenc1_mmu {
+	status = "okay";
+};
+&rkvdec {
+	status = "okay";
+};
+&rkvdec_mmu {
+	status = "okay";
+};
+&rkvenc_ccu {
+	status = "okay";
+};
